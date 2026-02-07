@@ -8,10 +8,10 @@ test('create phploy.ini file on init', function () {
     chdir($testDir);
 
     // 2. Run phploy command with init argument and capture output
-    $output = shell_exec('php '.$cwd.'/bin/phploy --init --debug 2>&1');
+    $output = shell_exec('php ' . $cwd . '/bin/phploy --init --debug 2>&1');
     echo "PHPloy output: " . PHP_EOL . $output . PHP_EOL;
 
-    // 3. Verify phploy.ini file exists 
+    // 3. Verify phploy.ini file exists
     expect(file_exists('phploy.ini'))->toBeTrue();
 
     // Cleanup

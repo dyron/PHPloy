@@ -22,14 +22,14 @@ class Config
     protected $passFile = '.phploy';
 
     /**
-     * @var array
+     * @var array<string,mixed>
      */
-    protected $servers = [];
+    protected array $servers = [];
 
     /**
-     * @var array
+     * @var array<string>
      */
-    protected $globalFilesToExclude = [
+    protected array $globalFilesToExclude = [
         '.gitignore',
         '.gitmodules',
     ];
@@ -207,6 +207,7 @@ class Config
 
     /**
      * Get all servers configuration
+     * @return array<string,array>
      */
     public function getServers(): array
     {
@@ -215,6 +216,8 @@ class Config
 
     /**
      * Get specific server configuration
+     * @param string $name
+     * @return array<string,mixed>|null
      */
     public function getServer(string $name): ?array
     {

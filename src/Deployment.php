@@ -169,7 +169,7 @@ class Deployment
 
         // Connect to server
         $this->connection = new Connection($server);
-        
+
         // Check if remote path exists
         if (!$this->connection->directoryExists('')) {
             $this->cli->error("\r\nSERVER: " . $name);
@@ -568,16 +568,16 @@ class Deployment
     {
         try {
             $this->cli->info("\r\nChecking remote path: " . $this->currentServerInfo['path']);
-            
+
             // Check if the directory exists
             if (!$this->connection->directoryExists('')) {
                 $this->cli->error("Remote path does not exist: " . $this->currentServerInfo['path']);
                 return;
             }
-            
+
             // Try to list contents of the root directory
             $contents = $this->connection->listContents('', false);
-            
+
             if (empty($contents)) {
                 $this->cli->warning("Remote path exists but is empty.");
             } else {

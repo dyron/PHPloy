@@ -64,7 +64,7 @@ class PHPloy
         }
 
         // Initialize Git
-        $this->git = new Git(getcwd());
+        $this->git = new Git(getcwd() ?: null);
 
         // Initialize deployment
         $this->deployment = new Deployment(

@@ -3,6 +3,7 @@
 use Banago\PHPloy\Connection;
 
 test('deploys only to default server when no --all flag', function () {
+    $cwd = getcwd();
     // 1. Setup test repository
     $testDir = '/tmp/phploy-test-' . uniqid();
     mkdir($testDir);
@@ -38,8 +39,8 @@ INI;
     file_put_contents('.gitignore', 'phploy.ini');
 
     // 3. Run phploy command with full path and capture output
-    $output = shell_exec('php /app/bin/phploy --fresh --debug 2>&1');
-    echo "PHPloy output: " . $output . PHP_EOL;
+    $output = shell_exec('php ' . $cwd . '/bin/phploy --fresh --debug 2>&1');
+    echo "PHPloy output: " . PHP_EOL . $output . PHP_EOL;
 
     // Give it time to finish deployment
     sleep(2);
@@ -72,6 +73,7 @@ INI;
 });
 
 test('deploys to all servers when --all flag is used', function () {
+    $cwd = getcwd();
     // 1. Setup test repository
     $testDir = '/tmp/phploy-test-' . uniqid();
     mkdir($testDir);
@@ -107,8 +109,8 @@ INI;
     file_put_contents('.gitignore', 'phploy.ini');
 
     // 3. Run phploy command with full path and capture output
-    $output = shell_exec('php /app/bin/phploy --all --fresh --debug 2>&1');
-    echo "PHPloy output: " . $output . PHP_EOL;
+    $output = shell_exec('php ' . $cwd . '/bin/phploy --all --fresh --debug 2>&1');
+    echo "PHPloy output: " . PHP_EOL . $output . PHP_EOL;
 
     // Give it time to finish deployment
     sleep(2);

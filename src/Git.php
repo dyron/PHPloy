@@ -32,7 +32,7 @@ class Git
      * @param string|null $repo
      * @throws \Exception
      */
-    public function __construct($repo = null)
+    public function __construct(string $repo = null)
     {
         $this->repo = $repo;
         try {
