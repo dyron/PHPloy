@@ -197,11 +197,10 @@ class Deployment
 
         if ($this->listFiles) {
             $this->listFiles($files);
-            $this->handleSubmodules($files);
         } else {
             $this->push($files);
-            $this->handleSubmodules($files);
         }
+        $this->handleSubmodules($files);
 
         // Show deployment size
         if (! $this->listFiles && $this->deploymentSize > 0) {
@@ -390,8 +389,8 @@ class Deployment
         }
 
         return array(
-            'upload' => $filesToUpload,
-            'delete' => $filesToDelete,
+            'upload' => $this->exclude($filesToUpload),
+            'delete' => $this->exclude($filesToDelete),
         );
     }
 
@@ -614,5 +613,20 @@ class Deployment
                 $this->cli->info("   {$file}");
             }
         }
+    }
+
+    private function exclude(?array $files = null): ?array
+    {
+        foreach($files as $i => $file) {
+            foreach ($this->currentServerInfo['exclude'] as $pattern) {
+                if (pattern_match($pattern, $file)) {
+                    unset($files[$i]);
+                    // @todo: log unset files?
+                    break;
+                }
+            }
+        }
+
+        return array_values($files);
     }
 }
