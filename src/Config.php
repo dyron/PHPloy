@@ -129,14 +129,13 @@ class Config
             }
         }
 
-        // Check if the quickmode URL is correct.
-        $parsed_url = parse_url($options['quickmode']);
-        if ($parsed_url === false) {
-            throw new \Exception('Your quickmode URL cannot be parsed. Please fix it.');
-        }
-
-        // Merge parsed quickmode details
         if (isset($options['quickmode'])) {
+            // Check if the quickmode URL is correct.
+            $parsed_url = parse_url($options['quickmode']);
+            if ($parsed_url === false) {
+                throw new \Exception('Your quickmode URL cannot be parsed. Please fix it.');
+            }
+            // Merge parsed quickmode details
             $config = array_merge($config, $parsed_url);
         }
 
