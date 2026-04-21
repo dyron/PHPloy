@@ -389,8 +389,8 @@ class Deployment
         }
 
         return array(
-            'upload' => $this->exclude($filesToUpload),
-            'delete' => $this->exclude($filesToDelete),
+            'upload' => $this->excludeFiles($filesToUpload),
+            'delete' => $this->excludeFiles($filesToDelete),
         );
     }
 
@@ -615,9 +615,9 @@ class Deployment
         }
     }
 
-    private function exclude(?array $files = null): ?array
+    private function excludeFiles(?array $files): ?array
     {
-        foreach($files as $i => $file) {
+        foreach ($files as $i => $file) {
             foreach ($this->currentServerInfo['exclude'] as $pattern) {
                 if (pattern_match($pattern, $file)) {
                     unset($files[$i]);
@@ -626,7 +626,6 @@ class Deployment
                 }
             }
         }
-
         return array_values($files);
     }
 }
